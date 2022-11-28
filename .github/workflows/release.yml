@@ -51,4 +51,6 @@ jobs:
 
       - name: Merge
         run: |
+          git switch main
+          git merge release/test
           git push origin main
