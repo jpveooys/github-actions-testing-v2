@@ -3,15 +3,31 @@ name: Release
 on:
   workflow_dispatch:
 
+on:
+  schedule:
+    - cron: '0 4 * * *'
+  workflow_dispatch:
+    inputs:
+      release-type:
+        description: 'Release type'
+        required: true
+        default: alpha
+        type: choice
+        options:
+          - alpha
+          - stable
+
 jobs:
-  branch:
-    name: Branch
-    runs-on: ubuntu-latest
+  release:
+    name: Release
+    runs-on: ubuntu-22.04
     steps:
       - name: Git clone repository
         uses: actions/checkout@v3
         with:
           fetch-depth: 0
+          # A custom token must be used, as GitHub doesn't trigger workflows
+          # for pushes made using the default token
           token: ${{ secrets.RELEASE_TOKEN }}
 
       - name: Configure Git user
@@ -19,25 +35,54 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git config user.name "github-actions[bot]"
 
-      - name: Create branch
-        run: git switch -c release/test
+      - name: Prepare release
+        run: npm run release:${{ inputs.release-type }} -- --npm.skipChecks
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
-      - name: Commit
-        run: git commit --allow-empty -m "Empty commit"
-
-      - name: Push
-        run: git push origin release/test
+      - id: git-branch
+        name: Get Git branch
+        run: echo "git-branch=$(git rev-parse --abbrev-ref HEAD)" >> "$GITHUB_OUTPUT"
 
       - name: Wait for tests to succeed
         uses: lewagon/wait-on-check-action@v1.2.0
         with:
-          ref: release/test
-          check-name: 'Test'
+          ref: ${{ steps.git-branch.outputs.git-branch }}
+          check-name: Lint and test
           repo-token: ${{ secrets.GITHUB_TOKEN }}
-          wait-interval: 10
+          wait-interval: 30
 
-      - name: Merge
+      - name: Merge release branch
         run: |
           git switch main
-          git merge release/test
+          git merge --ff-only ${{ steps.git-branch.outputs.git-branch }}
           git push origin main
+
+      - name: Make GitHub release public
+        uses: actions/github-script@v6
+        with:
+          script: |
+            import { version } from "./package.json"
+
+            const release = github.rest.repos.getReleaseByTag({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              tag: version,
+            })
+
+            if (!release.draft) {
+              throw new Error("Expected the release to be a draft")
+            }
+
+            github.rest.repos.updateRelease({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              release_id: release.id,
+              draft: false
+            })
+
+      - name: Delete release branch
+        if: always() && steps.git-branch.outputs.git-branch
+        run: |
+          git push origin :${{ steps.git-branch.outputs.git-branch }}
