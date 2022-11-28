@@ -1,4 +1,4 @@
-name: Test
+name: Release
 
 on:
   workflow_dispatch:
@@ -26,7 +26,7 @@ jobs:
   test:
     name: Test
     needs:
-      - release
+      - branch
     uses: ./.github/workflows/test.yml
     with:
       git-ref: release/test
