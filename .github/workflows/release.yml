@@ -37,8 +37,8 @@ jobs:
             github.rest.actions.createWorkflowDispatch({
               owner: 'jpveooys',
               repo: 'github-actions-testing-v2',
-              workflow_id: 'test',
-              ref: 'release/test'
+              workflow_id: 'test.yml',
+              ref: 'release/test',
             })
 
       - name: Wait for tests to succeed
