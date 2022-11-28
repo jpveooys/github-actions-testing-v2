@@ -2,6 +2,15 @@ name: Release
 
 on:
   workflow_dispatch:
+    inputs:
+      release-type:
+        description: 'Release type'
+        required: true
+        default: alpha
+        type: choice
+        options:
+          - alpha
+          - stable
 
 on:
   schedule:
