@@ -44,7 +44,6 @@ jobs:
       - name: Git clone repository
         uses: actions/checkout@v3
         with:
-          token: ${{ secrets.RELEASE_TOKEN }}
           fetch-depth: 0
 
       - name: Configure Git user
