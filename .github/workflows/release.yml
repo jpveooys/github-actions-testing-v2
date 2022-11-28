@@ -38,8 +38,8 @@ jobs:
               'jpveooys',
               'github-actions-testing-v2',
               'test',
-              'release/test',
-            });
+              'release/test'
+            })
 
       - name: Wait for tests to succeed
         uses: lewagon/wait-on-check-action@v1.2.0
