@@ -53,5 +53,5 @@ jobs:
 
       - name: Merge
         run: |
-          git merge release/test
+          git merge origin/release/test
           git push -u
