@@ -27,14 +27,19 @@ jobs:
       - name: Push
         run: git push origin release/test
 
-      - name: Trigger workflow
-        run: |
-          curl \
-            -X POST \
-            -H "Accept: application/vnd.github+json" \
-            -H "Authorization: Bearer ${{ secrets.token }}" \
-            https://api.github.com/repos/jpveooys/github-actions-testing-v2/actions/workflows/test/dispatches \
-            -d '{"ref":"release/test"}'
+      - uses: actions/github-script@v6
+        id: my-script
+        with:
+          result-encoding: string
+          retries: 3
+          retry-exempt-status-codes: 400,401
+          script: |
+            github.rest.actions.createWorkflowDispatch({
+              'jpveooys',
+              'github-actions-testing-v2',
+              'test',
+              'release/test',
+            });
 
       - name: Wait for tests to succeed
         uses: lewagon/wait-on-check-action@v1.2.0
