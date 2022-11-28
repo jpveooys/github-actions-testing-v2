@@ -1,0 +1,49 @@
+name: Test
+
+on:
+  workflow_dispatch:
+
+jobs:
+  branch:
+    name: Branch
+    runs-on: ubuntu-latest
+    steps:
+      - name: Git clone repository
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.RELEASE_TOKEN }}
+
+      - name: Commit
+        run: git switch release/test
+
+      - name: Commit
+        run: git commit --allow-empty -m "Empty commit"
+
+      - name: Push
+        run: git push origin release/test
+
+    test:
+      name: Test
+      needs:
+        - release
+      uses: ./.github/workflows/test.yml
+      with:
+        git-ref: release/test
+
+    merge:
+      name: Merge
+      runs-on: ubuntu-latest
+      needs:
+        - test
+      steps:
+        - name: Git clone repository
+          uses: actions/checkout@v3
+          with:
+            token: ${{ secrets.RELEASE_TOKEN }}
+            fetch-depth: 0
+
+        - name: Merge
+          run: |
+            git merge release/test
+            git push -u

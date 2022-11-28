@@ -5,7 +5,14 @@ on:
   push:
     branches:
       - main
+      - release/**
   workflow_call:
+    inputs:
+      git-ref:
+        description: 'Git ref'
+        required: true
+        default: ''
+        type: string
   workflow_dispatch:
 
 jobs:
@@ -15,6 +22,8 @@ jobs:
     steps:
       - name: Git clone repository
         uses: actions/checkout@v3
+        with:
+          ref: ${{ inputs.git-ref }}
 
       - name: Test
         run: exit
