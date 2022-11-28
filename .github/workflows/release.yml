@@ -27,29 +27,22 @@ jobs:
       - name: Push
         run: git push origin release/test
 
-  test:
-    name: Test
-    needs:
-      - branch
-    uses: ./.github/workflows/test.yml
-    with:
-      git-ref: release/test
-
-  merge:
-    name: Merge
-    runs-on: ubuntu-latest
-    needs:
-      - test
-    steps:
-      - name: Git clone repository
-        uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
-
-      - name: Configure Git user
+      - name: Trigger workflow
         run: |
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git config user.name "github-actions[bot]"
+          curl \
+            -X POST \
+            -H "Accept: application/vnd.github+json" \
+            -H "Authorization: Bearer ${{ secrets.token }}" \
+            https://api.github.com/repos/jpveooys/github-actions-testing-v2/actions/workflows/test/dispatches \
+            -d '{"ref":"release/test"}'
+
+      - name: Wait for tests to succeed
+        uses: lewagon/wait-on-check-action@v1.2.0
+        with:
+          ref: release/test
+          check-name: 'Test'
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          wait-interval: 10
 
       - name: Merge
         run: |
