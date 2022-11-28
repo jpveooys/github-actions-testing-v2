@@ -35,10 +35,10 @@ jobs:
           retry-exempt-status-codes: 400,401
           script: |
             github.rest.actions.createWorkflowDispatch({
-              'jpveooys',
-              'github-actions-testing-v2',
-              'test',
-              'release/test'
+              owner: 'jpveooys',
+              repo: 'github-actions-testing-v2',
+              workflow_id: 'test',
+              ref: 'release/test'
             })
 
       - name: Wait for tests to succeed
