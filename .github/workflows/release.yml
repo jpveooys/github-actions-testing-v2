@@ -35,10 +35,9 @@ jobs:
           git config push.autoSetupRemote true
 
       - name: Prepare release
-        run: npm run release:${{ inputs.release-type }} -- --npm.skipChecks
+        run: npm run release:${{ inputs.release-type }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - id: git-branch
         name: Get Git branch
@@ -58,28 +57,8 @@ jobs:
           git merge --ff-only ${{ steps.git-branch.outputs.git-branch }}
           git push origin main
 
-      - name: Make GitHub release public
-        uses: actions/github-script@v6
-        with:
-          script: |
-            const { version } = require("./package.json")
-
-            const release = github.rest.repos.getReleaseByTag({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              tag: version,
-            })
-
-            if (!release.draft) {
-              throw new Error("Expected the release to be a draft")
-            }
-
-            github.rest.repos.updateRelease({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              release_id: release.id,
-              draft: false
-            })
+      - name: Finalise release
+        run: npm run release:${{ inputs.release-type }} -- --no-increment --no-git --github.release --github.update --no-github.draft
 
       - name: Delete release branch
         if: always() && steps.git-branch.outputs.git-branch

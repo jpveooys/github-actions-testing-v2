@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "echo building",
+    "prepack": "npm run build",
     "test": "echo \"Error: no test specified\" && exit 1",
     "release:alpha": "release-it --preRelease=alpha",
     "release:stable": "release-it --git.tagMatch='v[0-9]*\\\\.[0-9]*\\\\.[0-9]*'"
