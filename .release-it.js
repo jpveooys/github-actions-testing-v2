@@ -7,6 +7,9 @@ module.exports = {
     // eslint-disable-next-line no-template-curly-in-string
     tagName: 'v${version}',
   },
+  github: {
+    releaseName: 'v${version}'
+  },
   npm: {
     publish: false,
   },
