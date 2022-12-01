@@ -4,6 +4,7 @@ module.exports = {
     commitMessage: 'release: v${version}',
     pushArgs: '--set-upstream',
     requireBranch: 'main',
+    requireCommits: true,
     // eslint-disable-next-line no-template-curly-in-string
     tagName: 'v${version}',
   },
