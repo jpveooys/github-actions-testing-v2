@@ -50,7 +50,7 @@ jobs:
         uses: lewagon/wait-on-check-action@3a563271c3f8d1611ed7352809303617ee7e54ac
         with:
           ref: ${{ steps.git-branch.outputs.git-branch }}
-          running-workflow-name: Release
+          running-workflow-name: ${{ github.workflow }}
           repo-token: ${{ secrets.GITHUB_TOKEN }}
           wait-interval: 30
 
