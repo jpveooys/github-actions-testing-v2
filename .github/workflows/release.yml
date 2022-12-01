@@ -62,7 +62,7 @@ jobs:
         uses: actions/github-script@v6
         with:
           script: |
-            import { version } from "./package.json"
+            const { version } = require("./package.json")
 
             const release = github.rest.repos.getReleaseByTag({
               owner: context.repo.owner,
