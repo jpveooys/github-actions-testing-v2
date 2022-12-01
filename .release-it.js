@@ -2,7 +2,7 @@ module.exports = {
   git: {
     // eslint-disable-next-line no-template-curly-in-string
     commitMessage: 'release: v${version}',
-    pushArgs: '--follow-tags --set-upstream',
+    pushArgs: '--set-upstream',
     requireBranch: 'main',
     // eslint-disable-next-line no-template-curly-in-string
     tagName: 'v${version}',

@@ -55,7 +55,7 @@ jobs:
         run: |
           git switch main
           git merge --ff-only ${{ steps.git-branch.outputs.git-branch }}
-          git push origin main
+          git push --follow-tags origin main
 
       - name: Publish the release
         env:
