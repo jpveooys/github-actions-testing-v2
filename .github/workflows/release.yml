@@ -48,7 +48,7 @@ jobs:
         uses: lewagon/wait-on-check-action@v1.2.0
         with:
           ref: ${{ steps.git-branch.outputs.git-branch }}
-          check-name: Lint and test
+          running-workflow-name: Release
           repo-token: ${{ secrets.GITHUB_TOKEN }}
           wait-interval: 30
 
