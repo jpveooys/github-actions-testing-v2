@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "build": "echo building",
     "test": "echo \"Error: no test specified\" && exit 1",
     "release:alpha": "release-it --preRelease=alpha",
     "release:stable": "release-it --git.tagMatch='v[0-9]*\\\\.[0-9]*\\\\.[0-9]*'"
