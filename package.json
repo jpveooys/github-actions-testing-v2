@@ -8,7 +8,7 @@
     "prepack": "npm run build",
     "test": "echo \"Error: no test specified\" && exit 1",
     "release:alpha": "release-it --preRelease=alpha",
-    "release:stable": "release-it --git.tagMatch='v[0-9]*\\\\.[0-9]*\\\\.[0-9]*'"
+    "release:stable": "release-it"
   },
   "repository": {
     "type": "git",
@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/jpveooys/github-actions-testing-v2#readme",
   "devDependencies": {
+    "@release-it/conventional-changelog": "^5.1.1",
     "release-it": "^15.5.0"
   }
 }
