@@ -12,20 +12,6 @@ on:
           - alpha
           - stable
 
-on:
-  schedule:
-    - cron: '0 4 * * *'
-  workflow_dispatch:
-    inputs:
-      release-type:
-        description: 'Release type'
-        required: true
-        default: alpha
-        type: choice
-        options:
-          - alpha
-          - stable
-
 jobs:
   release:
     name: Release
