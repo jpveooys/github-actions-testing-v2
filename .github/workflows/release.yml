@@ -25,6 +25,9 @@ jobs:
           # for pushes made using the default token
           token: ${{ secrets.RELEASE_TOKEN }}
 
+      - name: npm install
+        run: npm install
+
       - name: Configure Git user
         run: |
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
