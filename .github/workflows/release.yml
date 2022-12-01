@@ -58,6 +58,8 @@ jobs:
           git push origin main
 
       - name: Finalise release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: npm run release:${{ inputs.release-type }} -- --no-increment --no-git --github.release --github.update --no-github.draft
 
       - name: Delete release branch
