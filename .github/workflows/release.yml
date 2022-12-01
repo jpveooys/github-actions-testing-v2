@@ -57,10 +57,10 @@ jobs:
           git merge --ff-only ${{ steps.git-branch.outputs.git-branch }}
           git push origin main
 
-      - name: Finalise release
+      - name: Publish the release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: npm run release:${{ inputs.release-type }} -- --no-increment --no-git --github.release --github.update --no-github.draft
+        run: npm run release:${{ inputs.release-type }} -- --no-increment --no-git --github.release
 
       - name: Delete release branch
         if: always() && steps.git-branch.outputs.git-branch
