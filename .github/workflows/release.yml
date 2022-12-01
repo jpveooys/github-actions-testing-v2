@@ -32,8 +32,8 @@ jobs:
         run: |
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git config user.name "github-actions[bot]"
-          git config git config push.autoSetupRemote
-          git config git config push.default
+          git config push.autoSetupRemote
+          git config push.default
 
       - name: Prepare release
         run: npm run release:${{ inputs.release-type }} -- --npm.skipChecks
