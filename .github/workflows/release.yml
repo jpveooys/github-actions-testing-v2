@@ -3,6 +3,9 @@ name: Release
 concurrency:
   group: ${{ github.workflow }}
 
+env:
+  release-type: ${{ inputs.release-type }}
+
 on:
   workflow_dispatch:
     inputs:
@@ -39,6 +42,7 @@ jobs:
       - id: check-release-required
         name: Check if release required
         run: |
+          echo ${{ env.release-type }}
           VERSION_REGEX=^v[0-9]+\.[0-9]+\.[0-9]+${{ inputs.release-type == 'stable' && '$' || '-alpha\.[0-9]+$' }}
           echo "continue=$(! [[ `git describe --match 'v[0-9]*' --exact-match` =~ $VERSION_REGEX ]] && echo 1)" >> "$GITHUB_OUTPUT"
 
