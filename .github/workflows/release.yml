@@ -84,8 +84,7 @@ jobs:
         if: steps.check-release-required.outputs.continue
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: npm run release:${{ inputs.release-type }} -- --no-increment --no-git --npm.publish --npm.skipChecks --github.release
+        run: npm run release:${{ inputs.release-type }} -- --no-increment --no-git --github.release
 
       - name: Delete release branch
         if: always() && steps.check-release-required.outputs.continue && steps.git-branch.outputs.git-branch
