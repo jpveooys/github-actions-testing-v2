@@ -7,7 +7,7 @@ body:
   - type: markdown
     attributes:
       value: |
-        Thanks for reporting a bug.
+        Thanks for clicking through to report a bug.
 
         All questions are optional; fill in as much of the form as you’re able to.
   - type: textarea
@@ -27,9 +27,9 @@ body:
   - type: input
     id: version
     attributes:
-      label: Version
+      label: Version of MOD.UK Frontend
       description: What version of MOD.UK Frontend were you using?
-  - type: textarea
+  - type: input
     id: browser
     attributes:
       label: What web browsers have you seen this in?
