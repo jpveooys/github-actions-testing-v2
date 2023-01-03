@@ -1,0 +1,46 @@
+name: Bug
+description: Report a problem with MOD.UK Frontend
+labels:
+  - bug
+  - awaiting triage
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reporting an issue.
+
+        All questions are optional; fill in as much of the form as you’re able to.
+  - type: textarea
+    id: repro-steps
+    attributes:
+      label: What steps will reproduce the bug?
+      description: Enter a code snippet if relevant
+  - type: textarea
+    id: expected
+    attributes:
+      label: What did you expect to happen?
+  - type: textarea
+    id: expected
+    attributes:
+      label: What happened instead?
+      description: Attach a screenshot or screen recording if relevant
+  - type: input
+    id: version
+    attributes:
+      label: Version
+      description: What version of MOD.UK Frontend were you using?
+  - type: textarea
+    id: browser
+    attributes:
+      label: What web browsers have you seen this in?
+      description: eg Firefox 108, Chrome 105
+  - type: input
+    id: operating-system
+    attributes:
+      label: What operating systems were you using?
+      description: eg Windows 10, Android 13
+  - type: textarea
+    id: additional-info
+    attributes:
+      label: Anything else
+      description: Any other information that you think is relevant
