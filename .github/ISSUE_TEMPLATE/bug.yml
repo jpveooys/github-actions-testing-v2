@@ -34,7 +34,7 @@ body:
     attributes:
       label: What web browsers have you seen this in?
       description: eg Firefox 108, Chrome 105
-  - type: textarea
+  - type: input
     id: operating-system
     attributes:
       label: What operating systems were you using?
