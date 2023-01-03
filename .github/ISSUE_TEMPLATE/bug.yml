@@ -27,8 +27,8 @@ body:
   - type: input
     id: version
     attributes:
-      label: Version of MOD.UK Frontend
-      description: What version of MOD.UK Frontend were you using?
+      label: What version of MOD.UK Frontend were you using?
+      description: The version of the @moduk/frontend package used
   - type: input
     id: browser
     attributes:
