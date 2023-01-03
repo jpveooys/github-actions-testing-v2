@@ -20,7 +20,7 @@ body:
     attributes:
       label: What did you expect to happen?
   - type: textarea
-    id: expected
+    id: actual
     attributes:
       label: What happened instead?
       description: Attach a screenshot or screen recording if relevant
