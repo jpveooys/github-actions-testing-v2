@@ -1,0 +1,34 @@
+name: Request a feature
+description: Suggest a new feature or an enhancement
+labels:
+  - enhancement
+  - awaiting triage
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for suggesting a feature.
+
+        All questions are optional; fill in as much of the form as you’re able to.
+  - type: input
+    id: related-component
+    attributes:
+      label: Related components
+      description: The names of any existing components that this request relates to
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+      description: |
+        What are you trying to do?
+        Is this something you think should behave differently, or something that you currently cannot do?
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives tried
+      description: Have you tried any alternatives? Are you currently using any alternatives?
+  - type: textarea
+    id: additional-info
+    attributes:
+      label: Anything else
+      description: Any other information that you think is relevant

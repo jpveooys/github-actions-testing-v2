@@ -1,5 +1,5 @@
-name: Bug
-description: Report a problem with MOD.UK Frontend
+name: Report a bug
+description: If something’s not working as expected
 labels:
   - bug
   - awaiting triage
@@ -7,7 +7,7 @@ body:
   - type: markdown
     attributes:
       value: |
-        Thanks for reporting an issue.
+        Thanks for reporting a bug.
 
         All questions are optional; fill in as much of the form as you’re able to.
   - type: textarea
@@ -34,7 +34,7 @@ body:
     attributes:
       label: What web browsers have you seen this in?
       description: eg Firefox 108, Chrome 105
-  - type: input
+  - type: textarea
     id: operating-system
     attributes:
       label: What operating systems were you using?
