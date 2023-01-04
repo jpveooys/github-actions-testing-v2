@@ -23,8 +23,8 @@ body:
   - type: textarea
     id: alternatives
     attributes:
-      label: Alternatives tried
-      description: Have you tried any alternatives? Are you currently using any alternatives?
+      label: Alternatives
+      description: Are you using or have you tried any alternatives?
   - type: textarea
     id: additional-info
     attributes:
