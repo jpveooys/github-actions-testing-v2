@@ -29,16 +29,11 @@ body:
     attributes:
       label: What version of MOD.UK Frontend were you using?
       description: The version of the @moduk/frontend package the problem was seen in
-  - type: input
-    id: browser
+  - type: textarea
+    id: browser-os
     attributes:
-      label: What web browsers have you seen this in?
-      description: For example, Firefox 108 or Chrome 105
-  - type: input
-    id: operating-system
-    attributes:
-      label: What operating system were you using?
-      description: For example, Windows 10 or Android 13
+      label: What web browsers and operating systems were you using?
+      description: For example, Firefox 108 on Windows 10 and Chrome 105 on Android 13
   - type: textarea
     id: additional-info
     attributes:
