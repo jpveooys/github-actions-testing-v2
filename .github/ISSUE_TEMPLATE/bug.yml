@@ -1,5 +1,5 @@
-name: Report a bug
-description: Let us know if something’s not working as expected.
+name: Bug report
+description: Report a bug or regression
 labels:
   - bug
   - awaiting triage
