@@ -1,5 +1,5 @@
 name: Report a bug
-description: If something’s not working as expected
+description: Let us know if something’s not working as expected
 labels:
   - bug
   - awaiting triage
@@ -9,7 +9,7 @@ body:
       value: |
         Thanks for clicking through to report a bug.
 
-        All questions are optional; fill in as much of the form as you’re able to.
+        All questions are optional; fill in as much of the form as you’re able to. Do not include any sensitive information.
   - type: textarea
     id: repro-steps
     attributes:
@@ -28,7 +28,7 @@ body:
     id: version
     attributes:
       label: What version of MOD.UK Frontend were you using?
-      description: The version of the @moduk/frontend package used
+      description: The version of the @moduk/frontend package the problem was seen in
   - type: input
     id: browser
     attributes:
@@ -42,5 +42,5 @@ body:
   - type: textarea
     id: additional-info
     attributes:
-      label: Anything else
-      description: Any other information that you think is relevant
+      label: Context and anything else
+      description: What are you trying to accomplish? How has this issue affected you? Do you have a suggested fix?
