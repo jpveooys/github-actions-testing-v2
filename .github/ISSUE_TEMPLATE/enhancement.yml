@@ -24,7 +24,7 @@ body:
     id: alternatives
     attributes:
       label: Alternatives
-      description: Are you using or have you tried any alternatives?
+      description: Are you using or have you tried any alternatives or workarounds?
   - type: textarea
     id: additional-info
     attributes:
