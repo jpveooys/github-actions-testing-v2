@@ -29,4 +29,4 @@ body:
     id: additional-info
     attributes:
       label: Anything else
-      description: Any other information that you think is relevant
+      description: Any other information that you think is relevant. Include details of any user research you’ve done on this feature
