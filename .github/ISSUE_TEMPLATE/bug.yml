@@ -7,9 +7,9 @@ body:
   - type: markdown
     attributes:
       value: |
-        Thanks for clicking through to report a bug.
-
-        All questions are optional; fill in as much of the form as you’re able to. Do not include any sensitive information.
+        You’re reporting a bug in MOD.UK Frontend. All questions are optional; fill in as much of the form as you’re able to.
+        
+        Do not include any sensitive information.
   - type: textarea
     id: repro-steps
     attributes:

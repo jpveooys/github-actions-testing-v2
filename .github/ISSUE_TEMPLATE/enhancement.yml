@@ -7,9 +7,9 @@ body:
   - type: markdown
     attributes:
       value: |
-        Thanks for clicking through to suggest a feature.
-
-        All questions are optional; fill in as much of the form as you’re able to. Do not include any sensitive information.
+        You’re suggesting a feature to add to MOD.UK Frontend. All questions are optional; fill in as much of the form as you’re able to.
+        
+        Do not include any sensitive information.
   - type: input
     id: related-component
     attributes:
