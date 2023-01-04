@@ -9,12 +9,12 @@ body:
       value: |
         You’re reporting a bug in MOD.UK Frontend. All questions are optional – fill in as much of the form as you’re able to.
         
-        Do not include any sensitive information.
+        All issues created in this repository are public. Do not include any sensitive information.
   - type: textarea
     id: repro-steps
     attributes:
       label: What steps will reproduce the bug?
-      description: Enter a code snippet if relevant
+      description: Include a code snippet or public link if relevant
   - type: textarea
     id: expected
     attributes:
@@ -33,12 +33,12 @@ body:
     id: browser
     attributes:
       label: What web browsers have you seen this in?
-      description: eg Firefox 108, Chrome 105
+      description: For example, Firefox 108 or Chrome 105
   - type: input
     id: operating-system
     attributes:
       label: What operating systems were you using?
-      description: eg Windows 10, Android 13
+      description: For example, Windows 10 or Android 13
   - type: textarea
     id: additional-info
     attributes:
