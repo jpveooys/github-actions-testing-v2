@@ -8,7 +8,7 @@ body:
     attributes:
       value: |
         You’re suggesting a feature to add to MOD.UK Frontend. All questions are optional – fill in as much of the form as you’re able to.
-        
+
         All issues created in this repository are public. Do not include any sensitive information.
   - type: input
     id: related-component
