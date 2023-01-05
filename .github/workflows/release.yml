@@ -3,20 +3,10 @@ name: Release
 concurrency:
   group: ${{ github.workflow }}
 
-env:
-  release-type: ${{ inputs.release-type || 'stable' }}
-
 on:
+  schedule:
+    - cron: '0 4 * * *'
   workflow_dispatch:
-    inputs:
-      release-type:
-        description: 'Release type'
-        required: true
-        default: alpha
-        type: choice
-        options:
-          - alpha
-          - stable
 
 jobs:
   release:
@@ -42,7 +32,7 @@ jobs:
       - id: check-release-required
         name: Check if release required
         run: |
-          VERSION_REGEX=^v[0-9]+\.[0-9]+\.[0-9]+${{ env.release-type == 'stable' && '$' || '-alpha\.[0-9]+$' }}
+          VERSION_REGEX=^v[0-9]+\.[0-9]+\.[0-9]+$
           echo "continue=$(! [[ `git describe --match 'v[0-9]*' --exact-match` =~ $VERSION_REGEX ]] && echo 1)" >> "$GITHUB_OUTPUT"
 
       - name: Configure Git user
@@ -54,9 +44,9 @@ jobs:
 
       - name: Prepare release
         if: steps.check-release-required.outputs.continue
-        run: npm run release:${{ env.release-type }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: npm run release
 
       - id: git-branch
         if: steps.check-release-required.outputs.continue
@@ -83,9 +73,8 @@ jobs:
         if: steps.check-release-required.outputs.continue
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: npm run release:${{ env.release-type }} -- --no-increment --no-git --github.release
+        run: npm run release -- --no-increment --no-git --github.release
 
       - name: Delete release branch
         if: always() && steps.check-release-required.outputs.continue && steps.git-branch.outputs.git-branch
-        run: |
-          git push origin :${{ steps.git-branch.outputs.git-branch }}
+        run: git push origin :${{ steps.git-branch.outputs.git-branch }}
