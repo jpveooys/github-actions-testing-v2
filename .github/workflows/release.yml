@@ -4,8 +4,6 @@ concurrency:
   group: ${{ github.workflow }}
 
 on:
-  schedule:
-    - cron: '0 4 * * *'
   workflow_dispatch:
 
 jobs:
@@ -17,64 +15,15 @@ jobs:
         uses: actions/checkout@v3
         with:
           fetch-depth: 0
-          # A custom token must be used, as GitHub doesn't trigger workflows
-          # for pushes made using the default token
-          token: ${{ secrets.RELEASE_TOKEN }}
 
       - uses: actions/setup-node@v3
         with:
           node-version: 18
-          registry-url: 'https://registry.npmjs.org'
 
       - name: npm install
         run: npm install
 
-      - id: check-release-required
-        name: Check if release required
-        run: |
-          VERSION_REGEX=^v[0-9]+\.[0-9]+\.[0-9]+$
-          echo "continue=$(! [[ `git describe --match 'v[0-9]*' --exact-match` =~ $VERSION_REGEX ]] && echo 1)" >> "$GITHUB_OUTPUT"
-
-      - name: Configure Git user
-        if: steps.check-release-required.outputs.continue
-        run: |
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git config user.name "github-actions[bot]"
-          git config push.autoSetupRemote true
-
-      - name: Prepare release
-        if: steps.check-release-required.outputs.continue
+      - name: Release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: npm run release
-
-      - id: git-branch
-        if: steps.check-release-required.outputs.continue
-        name: Get Git branch
-        run: echo "git-branch=$(git rev-parse --abbrev-ref HEAD)" >> "$GITHUB_OUTPUT"
-
-      - name: Wait for tests to succeed
-        if: steps.check-release-required.outputs.continue
-        uses: lewagon/wait-on-check-action@3a563271c3f8d1611ed7352809303617ee7e54ac
-        with:
-          ref: ${{ steps.git-branch.outputs.git-branch }}
-          running-workflow-name: ${{ github.workflow }}
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
-          wait-interval: 30
-
-      - name: Merge release branch
-        if: steps.check-release-required.outputs.continue
-        run: |
-          git switch main
-          git merge --ff-only ${{ steps.git-branch.outputs.git-branch }}
-          git push --follow-tags origin main
-
-      - name: Publish the release
-        if: steps.check-release-required.outputs.continue
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: npm run release -- --no-increment --no-git --github.release
-
-      - name: Delete release branch
-        if: always() && steps.check-release-required.outputs.continue && steps.git-branch.outputs.git-branch
-        run: git push origin :${{ steps.git-branch.outputs.git-branch }}
