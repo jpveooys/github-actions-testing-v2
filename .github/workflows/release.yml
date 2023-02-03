@@ -4,20 +4,21 @@ concurrency:
   group: ${{ github.workflow }}
 
 on:
-  workflow_run:
-    workflows:
-      - Lint and test
-    types:
-      - completed
+  push:
     branches:
       - main
   workflow_dispatch:
 
 jobs:
+  lint_and_test:
+    name: Lint and test
+    uses: ./.github/workflows/test.yml
+
   release:
     name: Release
     runs-on: ubuntu-latest
-    if: github.event.workflow_run.conclusion == 'success'
+    needs:
+      - lint_and_test
     steps:
       - name: Git clone repository
         uses: actions/checkout@v3

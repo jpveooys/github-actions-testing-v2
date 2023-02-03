@@ -2,10 +2,7 @@ name: Lint and test
 
 on:
   pull_request:
-  push:
-    branches:
-      - main
-      - release-bot/**
+  workflow_call:
   workflow_dispatch:
 
 jobs:
