@@ -1,0 +1,13 @@
+name: Release
+
+concurrency:
+  group: ${{ github.workflow }}
+
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+  lint_and_test:
+    name: Lint and test
+    uses: ./.github/workflows/test.yml

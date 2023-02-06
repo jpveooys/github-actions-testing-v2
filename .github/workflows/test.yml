@@ -12,8 +12,6 @@ jobs:
     steps:
       - name: Git clone repository
         uses: actions/checkout@v3
-        with:
-          ref: ${{ inputs.git-ref }}
 
       - name: Test
-        run: exit 1
+        run: npm run test
