@@ -1,7 +1,7 @@
 module.exports = {
   git: {
     commit: false,
-    pushArgs: 'origin v${version}',
+    push: false,
     requireBranch: 'main',
     requireCommits: true,
     // eslint-disable-next-line no-template-curly-in-string
@@ -11,6 +11,9 @@ module.exports = {
     release: true,
     // eslint-disable-next-line no-template-curly-in-string
     releaseName: 'v${version}',
+  },
+  hooks: {
+    "before:github:release": "git push origin v${version}"
   },
   npm: false,
 }
