@@ -1,6 +1,7 @@
 module.exports = {
   git: {
     commit: false,
+    pushArgs: 'origin v${version}',
     requireBranch: 'main',
     requireCommits: true,
     // eslint-disable-next-line no-template-curly-in-string
