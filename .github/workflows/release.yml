@@ -81,4 +81,4 @@ jobs:
 
       - name: Delete tag on failure
         if: always() && steps.prepare-release.outcome == 'success' && steps.publish-release.outcome != 'success'
-        run: git push --delete origin refs/tags/`git describe --tags --exact`
+        run: git push --delete origin refs/tags/`git describe --tags --exact-match`
