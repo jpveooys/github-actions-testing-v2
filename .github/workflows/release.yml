@@ -77,7 +77,7 @@ jobs:
 
       - name: Delete release branch
         if: always() && steps.check-release-required.outputs.continue && steps.git-branch.outputs.git-branch
-        run: git push origin :${{ steps.git-branch.outputs.git-branch }}
+        run: git push --delete origin ${{ steps.git-branch.outputs.git-branch }}
 
       - name: Delete tag on failure
         if: always() && steps.prepare-release.outcome == 'success' && steps.publish-release.outcome != 'success'
