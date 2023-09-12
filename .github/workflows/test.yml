@@ -19,4 +19,4 @@ jobs:
           ref: ${{ inputs.git-ref }}
 
       - name: Test
-        run: exit
+        run: exit 1
